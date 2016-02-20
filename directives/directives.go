@@ -267,6 +267,7 @@ func (d *DirectiveList) Save() error {
 		astutil.DeleteImport(fset, f, path)
 	}
 
+	astutil.AddImport(fset, f, "github.com/mholt/caddy/caddy/https")
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/caddy/parse")
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/caddy/setup")
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/middleware")
