@@ -272,12 +272,14 @@ func (d *DirectiveList) Save() error {
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/caddy/setup")
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/middleware")
 
+	importName := ""
 	for _, dir := range d.list {
 		if dir.Removed {
 			continue
 		}
 		if dir.Core == false && len(dir.ImportPath) != 0 {
-			astutil.AddImport(fset, f, fmt.Sprintf("{{import-%s}}", dir.Name))
+			importName = strings.Replace(dir.Name, "-", "_", -1)
+			astutil.AddImport(fset, f, fmt.Sprintf("{{import-%s}}", importName))
 		}
 	}
 
@@ -309,12 +311,14 @@ func (d *DirectiveList) Save() error {
 			comment = "//@caddyext "
 		}
 
-		begin = strings.Replace(begin, fmt.Sprintf(`"{{import-%s}}"`, dir.Name), fmt.Sprintf(`%s%s "%s"`, comment, dir.Name, dir.ImportPath), -1)
+		importName = strings.Replace(dir.Name, "-", "_", -1)
+
+		begin = strings.Replace(begin, fmt.Sprintf(`"{{import-%s}}"`, importName), fmt.Sprintf(`%s%s "%s"`, comment, importName, dir.ImportPath), -1)
 
 		if dir.Core == true {
 			dirOrder = dirOrder + fmt.Sprintf(`	%s{"%s", %s},`+"\n", comment, dir.Name, dir.Setup)
 		} else {
-			dirOrder = dirOrder + fmt.Sprintf(`	%s{"%s", %s.Setup},`+"\n", comment, dir.Name, dir.Name)
+			dirOrder = dirOrder + fmt.Sprintf(`	%s{"%s", %s.Setup},`+"\n", comment, dir.Name, importName)
 		}
 	}
 
