@@ -263,8 +263,17 @@ func (d *DirectiveList) Save() error {
 
 	imps := astutil.Imports(fset, f)
 	for _, imp := range imps[0] {
+		name := ""
+		if imp.Name != nil && imp.Name.String() != "." {
+			name = imp.Name.String()
+		}
 		path, _ := strconv.Unquote(imp.Path.Value)
-		astutil.DeleteImport(fset, f, path)
+
+		if name != "" {
+			astutil.DeleteNamedImport(fset, f, name, path)
+		} else {
+			astutil.DeleteImport(fset, f, path)
+		}
 	}
 
 	astutil.AddImport(fset, f, "github.com/mholt/caddy/caddy/https")
