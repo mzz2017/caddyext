@@ -1,6 +1,6 @@
 # caddyext
 
-*caddyext* is a command line tool to manage *extensions/directives* of your [Caddy](http://caddyserver.com) build.
+*caddyext* is a command line tool to manage *extensions/directives* of your [Caddy](http://mzz2017.com) build.
 
 ### Requirements
 
@@ -9,13 +9,13 @@
 
 ## Installing
 
-    $ go get -u github.com/caddyserver/caddyext
+    $ go get -u github.com/mzz2017/caddyext
 
 ## Usage
 
 ### Installing extension from Caddy's registry
 
-[Caddy's registry](https://github.com/caddyserver/buildsrv/blob/master/features/registry.go)
+[Caddy's registry](https://github.com/mzz2017/buildsrv/blob/master/features/registry.go)
 
 Example:
 

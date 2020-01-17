@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/tools/go/ast/astutil"
 
-	"github.com/caddyserver/caddyext/directives"
+	"github.com/mzz2017/caddyext/directives"
 )
 
 // directiveSrc is the minimum source required for the directives manager to parse. We could
