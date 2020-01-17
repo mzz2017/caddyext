@@ -1,6 +1,6 @@
 package main
 
-import "github.com/caddyserver/caddyext/commands"
+import "github.com/mzz2017/caddyext/commands"
 
 func main() {
 	commands.Execute()
